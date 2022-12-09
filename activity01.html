@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular JS AJAX</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        table, th, td{
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 10px;
+            width: 1000px;
+        }
+        table tr:nth-child(odd){
+            background-color: #f2f2f2;
+        }
+        table tr:nth-child(even){
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Anuglar JS AJAX Application</h2>
+
+    <div ng-app="" ng-controller="employeeController">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Salary</th>
+            </tr>
+            <tr ng-repeat="employee in employees">
+                <td>{{employee.id}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.age}} years old</td>
+                <td>${{employee.salary}}.00 a month</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function employeeController($scope, $http){
+            var url = "http://localhost/pdc20/module09/api_r.php";
+            $http.get(url).success(function(response){
+                $scope.employees = response;
+            })
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+</body>
+</html>
